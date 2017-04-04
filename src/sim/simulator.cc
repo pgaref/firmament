@@ -115,8 +115,10 @@ void Simulator::ReplaySimulation() {
   TraceLoader* trace_loader = NULL;
   if (!FLAGS_simulation.compare("google")) {
     trace_loader = new GoogleTraceLoader(event_manager_);
+    LOG(INFO) << "Google";
   } else if (!FLAGS_simulation.compare("synthetic")) {
     trace_loader = new SyntheticTraceLoader(event_manager_);
+    LOG(INFO) << "Synthetic";
   }
   CHECK_NOTNULL(trace_loader);
   bridge_->LoadTraceData(trace_loader);
@@ -184,7 +186,7 @@ void Simulator::Run() {
   } else if (!FLAGS_solver.compare("custom")) {
   }
 
-  LOG(INFO) << "Starting Google trace simulator!";
+  LOG(INFO) << "Starting Trace simulator!";
   ReplaySimulation();
   LOG(INFO) << "Simulator has seen " << bridge_->get_num_duplicate_task_ids()
             << " duplicate task ids";
